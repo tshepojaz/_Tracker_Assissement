@@ -139,13 +139,11 @@ Navigate to **home_app → Roles** and create the following two roles:
 
 ### Step 17 — Import Authorisation Configuration
 
-Navigate to **home_app → Authorization**, click the **Import** button, and select the file:
+Navigate to **home_app → Authorization**, click the **Import** button, and select the following file included in this repository:
 
 ```
-home_app.json
+keycloak/home_app.json
 ```
-
-> This file is provided as part of the project email attachment.
 
 ### Step 18 — Authorisation Resources Confirmed
 
@@ -169,13 +167,11 @@ Before testing, ensure both APIs are running in Docker on the expected ports:
 | Catalog API | `5001` |
 | Order API | `5002` |
 
-Import the provided Postman collection file:
+Import the provided Postman collection file included in this repository:
 
 ```
-TrackerB2B.postman_collection.json
+postman/TrackerB2B.postman_collection.json
 ```
-
-> This file is included in the project email attachment.
 
 ### Step 20 — Run the Collection
 

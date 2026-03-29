@@ -1,0 +1,339 @@
+{
+  "info": {
+    "_postman_id": "e19263f5-e60b-4623-aee0-65f15deb6b72",
+    "name": "TrackerB2B",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "6004449"
+  },
+  "item": [
+    {
+      "name": "Catalog",
+      "item": [
+        {
+          "name": "GetAllProducts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5001/api/products?pageIndex=0&pageSize=5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5001",
+              "path": [
+                "api",
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "pageIndex",
+                  "value": "0"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetProductById",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5001/api/products/4783592e-ffb1-4d64-ab68-a0f9bfd19bcf",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5001",
+              "path": [
+                "api",
+                "products",
+                "4783592e-ffb1-4d64-ab68-a0f9bfd19bcf"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "CreateNewProduct",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{HomeApp}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"product\": {\n        \"name\": \"Clean Code by Robert C. Martin\",\n        \"description\": \"A handbook of agile software craftsmanship. v4\",\n        \"sku\": \"BOOK-020\",\n        \"price\": 54.99,\n        \"availableQuantity\": 200,\n        \"category\": 3\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5001/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5001",
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "UpdateProduct",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"product\": {\n         \"id\": \"a1b2c3d4-0001-0000-0000-000000000009\",\n         \"name\": \"Adidas Ultraboost 22 Running Shoes\",\n        \"description\": \"High-performance running shoes with BOOST midsole.\",\n        \"sku\": \"SPRT-001\",\n        \"price\": 189.99,\n        \"availableQuantity\": 2,\n        \"category\": 5\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5001/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5001",
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RemoveProduct",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5001/api/products/1435a677-ad4d-4755-9c38-ef1c273b516b",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5001",
+              "path": [
+                "api",
+                "products",
+                "1435a677-ad4d-4755-9c38-ef1c273b516b"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Order",
+      "item": [
+        {
+          "name": "GetOrderById",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{HomeApp}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5002/api/orders/550b039f-13d6-479d-8656-4631949bcc4b",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5002",
+              "path": [
+                "api",
+                "orders",
+                "550b039f-13d6-479d-8656-4631949bcc4b"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "CreateOrder",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{HomeToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"order\": {\n        \"customerReference\": \"c0000000-0000-0000-0000-000000000001\",\n        \"items\": [\n            {\n                \"productId\": \"a1b2c3d4-0001-0000-0000-0000000000019\",\n                \"quantity\": 1,\n                \"unitPrice\": 189.99\n            }\n        ]\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5002/api/orders",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5002",
+              "path": [
+                "api",
+                "orders"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Token",
+      "item": [
+        {
+          "name": "UserToken",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "username",
+                  "value": "justicem",
+                  "type": "text",
+                  "uuid": "f9d8e084-2d5c-47ec-8361-3488095fc172"
+                },
+                {
+                  "key": "password",
+                  "value": "1234",
+                  "type": "text",
+                  "uuid": "cd47f0c9-d5ce-4afb-99ed-c1b0b6b329fd"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password",
+                  "type": "text",
+                  "uuid": "ec8abaf8-4a33-465b-b0e9-be478bea45ad"
+                },
+                {
+                  "key": "client_id",
+                  "value": "home_app",
+                  "type": "text",
+                  "uuid": "b9ccf466-d860-48ce-8a83-6bb51c99498c"
+                },
+                {
+                  "key": "client_secret",
+                  "value": "9wc2HhOfLngcJTLl4rZlqtrfuIOTOCLX",
+                  "type": "text",
+                  "uuid": "8cdfc78f-d860-46eb-84fa-ee9f68c48fd8"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:9090/realms/home_order/protocol/openid-connect/token",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "realms",
+                "home_order",
+                "protocol",
+                "openid-connect",
+                "token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ApiToken",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "text",
+                  "uuid": "aecdb2f2-6860-4e08-8e36-bcd210fd178b"
+                },
+                {
+                  "key": "client_id",
+                  "value": "home_app",
+                  "type": "text",
+                  "uuid": "7a4f34bf-d632-4195-97fb-1d92f615fa2e"
+                },
+                {
+                  "key": "client_secret",
+                  "value": "6QK5aC4LNOBGfbnhY5yD7lCs6GHWgpNC",
+                  "type": "text",
+                  "uuid": "d35d4436-0003-452a-b840-7d7333c51549"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:9090/realms/home_order/protocol/openid-connect/token",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "realms",
+                "home_order",
+                "protocol",
+                "openid-connect",
+                "token"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
