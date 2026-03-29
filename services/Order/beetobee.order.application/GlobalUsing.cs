@@ -1,0 +1,10 @@
+global using Microsoft.EntityFrameworkCore;
+global using beetobee.order.application.Data;
+global using Microsoft.Extensions.Logging;
+global using beetobee.order.application.Dtos;
+global using beetobee.order.domain.Models;
+global using beetobee.order.domain.ValueObjects;
+global using beetobee.order.application.Exceptions;
+global using beetobee.order.application.Extentions;
+global using commonblock.Exceptions;
+global using commonblock.CQRS;

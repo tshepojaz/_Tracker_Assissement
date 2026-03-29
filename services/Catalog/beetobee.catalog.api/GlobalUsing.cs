@@ -1,0 +1,14 @@
+global using FluentValidation;
+global using Microsoft.EntityFrameworkCore;
+global using Carter;
+global using Mapster;
+global using MediatR;
+global using beetobee.catalog.api.Models;
+global using beetobee.catalog.api.Exceptions;
+global using beetobee.catalog.api.Dtos;
+global using beetobee.catalog.api.Data;
+global using beetobee.catalog.api.Enums;
+global using beetobee.catalog.api.Features.Product.Commands;
+global using beetobee.catalog.api.Features.Product.Queries;
+global using commonblock.CQRS;
+global using commonblock.Pagination;

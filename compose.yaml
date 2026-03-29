@@ -1,0 +1,77 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP.NET Core service.
+
+services:
+
+   beetobeedb:
+     image: mcr.microsoft.com/azure-sql-edge:latest
+     container_name: beetobeedb
+     environment:
+       - ACCEPT_EULA=Y
+       - SA_PASSWORD=beetobee@123
+     ports:
+       - 1400:1433
+     volumes:
+       - beetobeedb_data:/var/opt/mssql
+     healthcheck:
+       test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P beetobee@123 -Q 'SELECT 1' || exit 1"]
+       interval: 15s
+       timeout: 10s
+       retries: 10
+       start_period: 30s
+
+   beetobeeidentity:
+     image: quay.io/keycloak/keycloak:latest
+     container_name: beetobeeidentity
+     environment:
+       - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+       - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+       - KC_DB=mssql
+       - KC_DB_URL=jdbc:sqlserver://beetobeedb:1433;databaseName=BeetobeeDb;encrypt=false;trustServerCertificate=true;loginTimeout=30
+       - KC_DB_USERNAME=sa
+       - KC_DB_PASSWORD=beetobee@123
+       - KC_HTTP_PORT=9090
+       - KC_HOSTNAME_URL=http://localhost:9090
+       - KC_HOSTNAME_ADMIN_URL=http://localhost:9090
+     ports:
+       - "9090:9090"
+     command:
+       - start-dev
+     healthcheck:
+       test: ["CMD-SHELL", "curl -sf http://localhost:9090/health/ready || exit 1"]
+       interval: 20s
+       timeout: 10s
+       retries: 10
+       start_period: 60s
+     depends_on:
+       beetobeedb:
+         condition: service_healthy
+
+   beetobeecatalogapi:
+    image: beetobeecatalogapi
+    build:
+      context: .
+      dockerfile: services/Catalog/beetobee.catalog.api/Dockerfile
+    ports:
+      - 5001:5001
+    depends_on:
+      beetobeedb:
+        condition: service_healthy
+      beetobeeidentity:
+        condition: service_healthy
+
+   beetobeeorderapi:
+    image: beetobeeorderapi
+    build:
+      context: .
+      dockerfile: services/Order/beetobee.order.api/Dockerfile
+    ports:
+      - 5002:5002
+    depends_on:
+      beetobeedb:
+        condition: service_healthy
+      beetobeeidentity:
+        condition: service_healthy
+
+volumes:
+  beetobeedb_data:
+
